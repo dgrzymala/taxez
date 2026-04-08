@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>taxez — electronic press kit</title>
+    <meta name="description" content="taxez — dream pop / post-punk / coldwave z Krakowa. Electronic Press Kit.">
+    <meta property="og:title" content="taxez — electronic press kit">
+    <meta property="og:description" content="dream pop / post-punk / coldwave z Krakowa">
+    <meta property="og:type" content="website">
+
+    <!-- Agrandir Grand Heavy for headings — self-hosted, wrzuć pliki .woff2 do folderu /fonts/ -->
+    <!-- Fallback: Archivo Black from Google Fonts (geometryczny, bold, DIY-friendly) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=IBM+Plex+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /*
+            Agrandir Grand — wrzuć pliki do folderu fonts/
+            Jeśli nie masz pliku .woff2, strona użyje Archivo jako fallback.
+        */
+        @font-face {
+            font-family: 'Agrandir Grand';
+            src: url('fonts/AgrandirGrand-Heavy.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            /* Palette — Notion dark theme inspired */
+            --deep: #1a1a2e;
+            --purple: #2d2b55;
+            --purple-mid: #4a3f6b;
+            --purple-light: #9580c2;
+            --sand: #c0b8a8;
+            --sand-light: #d0c8b8;
+            --sand-pale: #e0d8c8;
+            --text: #d0cdc5;
+            --text-dim: #9a9590;
+            --text-muted: #5e5a55;
+            --bg: #191919;
+            --bg-card: #252525;
+            --border: #333;
+            --border-hover: #4a4a4a;
+
+            /* Typography — Agrandir Grand for branding, IBM Plex Mono for body */
+            --heading: 'Agrandir Grand', 'Archivo', 'Helvetica Neue', sans-serif;
+            --body: 'IBM Plex Mono', 'DM Mono', 'Courier New', monospace;
+            --mono: 'IBM Plex Mono', 'DM Mono', 'Courier New', monospace;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--body);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-weight: 400;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Background is solid — no grain/noise overlay */
+
+        /* ─── NAV ─── */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            background: linear-gradient(to bottom, var(--bg) 60%, transparent);
+        }
+
+        .nav-logo {
+            font-family: var(--heading);
+            font-size: 1rem;
+            text-transform: lowercase;
+            color: var(--purple-light);
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+
+        .nav-links a {
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            text-transform: lowercase;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--purple-light); }
+
+        /* ─── HERO ─── */
+        .hero {
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .hero::before {
+            content: ''; position: absolute; inset: 0; pointer-events: none;
+            background:
+                radial-gradient(ellipse 600px 400px at 50% 50%, rgba(74, 63, 107, 0.2) 0%, transparent 70%);
+        }
+
+        .hero-content { position: relative; z-index: 1; }
+
+        .hero-epk {
+            font-family: var(--heading);
+            font-size: clamp(0.9rem, 2.5vw, 1.4rem);
+            letter-spacing: 0.12em;
+            text-transform: lowercase;
+            color: var(--sand);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.2s forwards;
+        }
+
+        .hero-title {
+            font-family: var(--heading);
+            font-size: clamp(5rem, 18vw, 14rem);
+            font-weight: 400;
+            text-transform: lowercase;
+            line-height: 0.85;
+            letter-spacing: -0.02em;
+            color: var(--text);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.4s forwards;
+        }
+
+        .hero-location {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: lowercase;
+            color: var(--text-muted);
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.7s forwards;
+        }
+
+        .hero-scroll {
+            position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+            opacity: 0; animation: fadeUp 0.7s ease 1s forwards;
+        }
+        .hero-scroll span { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.3em; text-transform: lowercase; color: var(--text-muted); }
+        .scroll-line { width: 1px; height: 30px; background: linear-gradient(to bottom, var(--purple-light), transparent); animation: scrollPulse 2.5s ease infinite; }
+
+        /* ─── SECTIONS ─── */
+        section { padding: 5rem 2rem; max-width: 880px; margin: 0 auto; }
+
+        .section-num {
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-family: var(--heading);
+            font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+            text-transform: lowercase;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            color: var(--sand-light);
+        }
+
+        .divider {
+            width: 100%; height: 1px; max-width: 880px; margin: 0 auto;
+            background: var(--border);
+        }
+
+        /* ─── BIO ─── */
+        .bio-text {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: var(--text-dim);
+            max-width: 640px;
+        }
+        .bio-text p + p { margin-top: 1.1rem; }
+        .bio-text strong { color: var(--text); font-weight: 700; }
+        .bio-text em { color: var(--purple-light); font-style: italic; }
+
+        /* ─── PHOTOS ─── */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .photo-thumb {
+            aspect-ratio: 3/4;
+            border: 1px dashed var(--border-hover);
+            background: var(--bg-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 0.5rem;
+            transition: border-color 0.3s;
+            text-decoration: none;
+        }
+        .photo-thumb:hover { border-color: var(--purple-light); }
+
+        .photo-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(10%) contrast(1.05);
+            transition: filter 0.4s;
+        }
+        .photo-thumb img:hover { filter: grayscale(0%) contrast(1); }
+
+        .photo-thumb-placeholder {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            text-transform: lowercase;
+            color: var(--text-muted);
+        }
+
+        .photo-note {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+            line-height: 1.7;
+        }
+        .photo-note a {
+            color: var(--purple-light);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+            transition: border-color 0.3s;
+        }
+        .photo-note a:hover { border-color: var(--purple-light); }
+
+        /* ─── SINGLE ─── */
+        .single-card {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            transition: border-color 0.4s;
+        }
+        .single-card:hover { border-color: var(--border-hover); }
+
+        .single-cover {
+            width: 100%;
+            aspect-ratio: 1;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .single-cover img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+
+        .single-info h3 {
+            font-family: var(--heading);
+            font-size: 1.4rem;
+            text-transform: lowercase;
+            margin-bottom: 0.3rem;
+            color: var(--sand-light);
+        }
+
+        .single-type {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: lowercase;
+            color: var(--purple-light);
+            margin-bottom: 1.2rem;
+        }
+
+        .single-meta { display: flex; flex-direction: column; gap: 0.45rem; margin-bottom: 1.5rem; }
+        .single-meta-row { display: flex; align-items: baseline; gap: 0.8rem; }
+        .single-meta-key { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-muted); min-width: 75px; }
+        .single-meta-val { font-size: 0.85rem; color: var(--text-dim); }
+
+        .single-desc {
+            font-size: 0.88rem;
+            color: var(--text-dim);
+            line-height: 1.75;
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+            font-style: italic;
+        }
+
+        /* wcześniejsze wydawnictwa */
+        .disco-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.8rem; margin-top: 1rem; }
+        .disco-item { padding: 1rem; border: 1px solid var(--border); background: var(--bg-card); transition: all 0.3s; }
+        .disco-item:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+        .disco-title { font-family: var(--heading); font-size: 0.85rem; text-transform: lowercase; margin-bottom: 0.2rem; color: var(--sand); }
+        .disco-year { font-family: var(--mono); font-size: 0.72rem; color: var(--text-muted); }
+
+        /* ─── LINKS ─── */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.7rem;
+            margin-top: 2rem;
+        }
+
+        .link-item {
+            display: flex; align-items: center; gap: 0.8rem;
+            padding: 1rem 1.2rem;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            text-decoration: none;
+            color: var(--text-dim);
+            transition: all 0.3s;
+        }
+        .link-item:hover { border-color: var(--border-hover); color: var(--purple-light); }
+
+        .link-icon { width: 16px; height: 16px; flex-shrink: 0; }
+        .link-label { font-family: var(--heading); font-size: 0.8rem; text-transform: lowercase; }
+        .link-sub { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; color: var(--text-muted); display: block; margin-top: 0.1rem; }
+
+        /* ─── CONTACT ─── */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 2rem; }
+        .contact-card { padding: 1.5rem; border: 1px solid var(--border); background: var(--bg-card); }
+        .contact-card h4 { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: lowercase; color: var(--purple-light); margin-bottom: 0.7rem; }
+        .contact-card a { color: var(--text); text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: all 0.3s; }
+        .contact-card a:hover { color: var(--purple-light); border-color: var(--purple-light); }
+        .contact-card p { color: var(--text-dim); font-size: 0.78rem; margin-top: 0.35rem; }
+
+        /* ─── FOOTER ─── */
+        footer {
+            padding: 2.5rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            margin-top: 3rem;
+        }
+        .footer-logo { font-family: var(--heading); font-size: 1.2rem; text-transform: lowercase; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .footer-copy { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.15em; color: var(--text-muted); }
+
+        /* ─── ANIMATIONS ─── */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes scrollPulse { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.8; } }
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            nav { padding: 0.8rem 1rem; }
+            .nav-links { gap: 1rem; }
+            section { padding: 3.5rem 1.5rem; }
+            .single-card { grid-template-columns: 1fr; gap: 1.2rem; }
+            .single-cover { max-width: 200px; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .photo-grid { grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+        }
+        @media (max-width: 480px) {
+            .nav-links { display: none; }
+            .links-grid { grid-template-columns: 1fr; }
+            .photo-grid { grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-logo">taxez</div>
+    <ul class="nav-links">
+        <li><a href="#bio">bio</a></li>
+        <li><a href="#photos">zdjęcia</a></li>
+        <li><a href="#music">muzyka</a></li>
+        <li><a href="#links">linki</a></li>
+        <li><a href="#contact">kontakt</a></li>
+    </ul>
+</nav>
+
+<!-- ════════ HERO ════════ -->
+<section class="hero">
+    <div class="hero-content">
+        <p class="hero-epk">electronic press kit</p>
+                   <div class="single-cover">
+                <!-- Okładka singla — zamień src jeśli masz osobną grafikę -->
+                <img src="lts_cover.png" alt="Taxez — Lubiła Tańczyć Solo">
+            </div>
+        <h1 class="hero-title">taxez</h1>
+        <p class="hero-location">kraków</p>
+    </div>
+    <div class="hero-scroll">
+        <span>scroll</span>
+        <div class="scroll-line"></div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════════ BIO ════════ -->
+<section id="bio">
+    <div class="reveal">
+        <p class="section-num">001</p>
+        <h2 class="section-title">bio</h2>
+        <div class="bio-text">
+            <p><strong>Taxez</strong> to solowy projekt krakowskiego muzyka <strong>Daniela Grzymały</strong>, który od 2022 nagrywa w domu przy pomocy syntezatorów, gitar oraz Logic Pro. Muzycznie porusza się po terytoriach dream popu, post-punku, coldwave'u i indie rocka - zawsze z mocno zaznaczoną melodią.</p>
+            <p>Projekt ma swoje korzenie w krakowskiej <strong>Stajni Sobieski</strong>, w której pierwotnie powstał w 2014 roku jako zespół składający się z muzyków <strong>Die Flöte</strong> (Daniel Grzymała), <strong>Kaseciarza</strong> (Maciek Nowacki) oraz <strong>Two Red Triangles</strong> (Artur Rębisz) grając piosenki skomponowane przez Daniela. W tym składzie zespół zagrał kilka koncertów oraz wydał singiel "Myths Of The Overrated".</p>
+            <p>Po reaktywacji projektu w 2022 jako "single man act" Taxez wydał do tej pory 3 utwory - "Twarz", "Obce Ciało" oraz "Lubiła Tańczyć Solo", a na połowę maja 2026 zaplanowana jest EPka <strong>"Stany Pourazowe"</strong>.</p>
+            <p>Teksty piosenek Taxez poruszają tematy relacji, zmiennej rzeczywistości, technologicznego uwikłania.</p>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════════ PHOTOS ════════ -->
+<section id="photos">
+    <div class="reveal">
+        <p class="section-num">002</p>
+        <h2 class="section-title">zdjęcia promocyjne</h2>
+        <!--
+            ╔════════════════════════════════════════════════════════════╗
+            ║  Aby dodać zdjęcia, zamień <div> na <a> z <img> w środku: ║
+            ║                                                            ║
+            ║  <a href="LINK_DO_GOOGLE_DRIVE" class="photo-thumb"        ║
+            ║     target="_blank" rel="noopener">                        ║
+            ║      <img src="photo1.jpg" alt="Taxez promo 1">           ║
+            ║  </a>                                                      ║
+            ║                                                            ║
+            ║  Lub zostaw thumbnails jako linki do Drive.                ║
+            ╚════════════════════════════════════════════════════════════╝
+        -->
+        <div class="photo-grid">
+            <a href="#" class="photo-thumb" target="_blank" rel="noopener">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span class="photo-thumb-placeholder">foto 01</span>
+            </a>
+            <a href="#" class="photo-thumb" target="_blank" rel="noopener">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span class="photo-thumb-placeholder">foto 02</span>
+            </a>
+            <a href="#" class="photo-thumb" target="_blank" rel="noopener">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span class="photo-thumb-placeholder">foto 03</span>
+            </a>
+        </div>
+        <p class="photo-note">kliknij miniaturę aby pobrać zdjęcie w pełnej rozdzielczości</p>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════════ MUSIC — SINGLE ════════ -->
+<section id="music">
+    <div class="reveal">
+        <p class="section-num">003</p>
+        <h2 class="section-title">lubiła tańczyć solo</h2>
+
+        <div class="single-card">
+            <div class="single-cover">
+                <!-- Okładka singla — zamień src jeśli masz osobną grafikę -->
+                <img src="lts_cover.png" alt="Taxez — Lubiła Tańczyć Solo">
+            </div>
+            <div class="single-info">
+                <h3>lubiła tańczyć solo</h3>
+                <p class="single-type">singiel · 2026</p>
+
+                <div class="single-meta">
+                    <div class="single-meta-row"><span class="single-meta-key">premiera</span><span class="single-meta-val">10 kwietnia 2026</span></div>
+                    <div class="single-meta-row"><span class="single-meta-key">gatunek</span><span class="single-meta-val">Synth Pop / Dream Pop / Post-Punk</span></div>
+                    <div class="single-meta-row"><span class="single-meta-key">produkcja</span><span class="single-meta-val">Daniel Grzymała</span></div>
+                </div>
+
+                <p class="single-desc">
+                    <!-- TODO: Wpisz tutaj krótki opis singla -->
+                   „Lubiła Tańczyć Solo" to utwór osadzony w estetyce dream popu, coldwave'u i post-punka — pulsujący tanecznym rytmem i wypełniony brzmieniami syntezatorów oraz gitary z pogłosem. To historia o spotkaniu w jednym z byłych krakowskich klubów, tańcu oraz irracjonalnych obawach drzemiących w każdym z nas.
+<br>Utwór promuje minialbum „Stany Pourazowe EP", którego premiera odbędzie się 15 maja 2026 roku.
+                </p>
+            </div>
+        </div>
+
+        <p class="section-num" style="margin-top: 2.5rem;">wcześniejsze wydawnictwa</p>
+        <div class="disco-grid">
+            <div class="disco-item"><p class="disco-title">obce ciało</p><p class="disco-year">singiel · 2023</p></div>
+            <div class="disco-item"><p class="disco-title">twarz</p><p class="disco-year">singiel · 2022</p></div>
+            <div class="disco-item"><p class="disco-title">myths of the overrated</p><p class="disco-year">singiel · 2014</p></div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════════ LINKS ════════ -->
+<section id="links">
+    <div class="reveal">
+        <p class="section-num">004</p>
+        <h2 class="section-title">linki</h2>
+        <div class="links-grid">
+            <!-- TODO: Uzupełnij href prawdziwymi URL-ami -->
+            <a href="https://open.spotify.com/artist/1C3dujB5VOmgMMmdOuZ9wl?si=yE3ngXdIS5yZVVg43Jk_8A" class="link-item" target="_blank" rel="noopener">
+                <svg class="link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                <div><span class="link-label">spotify</span><span class="link-sub">streaming</span></div>
+            </a>
+            <a href="https://music.apple.com/pl/artist/taxez/1662387066" class="link-item" target="_blank" rel="noopener">
+                <svg class="link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026-.747.043-1.49.123-2.193.4-1.336.53-2.3 1.452-2.865 2.78-.192.448-.292.925-.363 1.408-.056.392-.088.785-.1 1.18 0 .032-.007.062-.01.093v12.223c.01.14.017.283.027.424.05.815.154 1.624.497 2.373.65 1.42 1.738 2.353 3.234 2.802.42.127.856.187 1.297.228.5.047 1.003.06 1.505.06h12.12c.25 0 .5-.016.75-.032.532-.034 1.062-.1 1.578-.27 1.436-.47 2.498-1.39 3.155-2.76.225-.47.367-.974.455-1.49.067-.39.1-.784.116-1.178.003-.06.01-.117.01-.177V6.197c-.003-.024-.005-.05-.007-.073zm-7.04 2.241l-.002 7.602a4.29 4.29 0 01-.073.756c-.14.71-.49 1.268-1.123 1.632-.376.218-.79.332-1.218.387-.376.048-.754.062-1.125-.027-.756-.18-1.308-.672-1.52-1.42-.133-.474-.1-.953.1-1.408.3-.674.846-1.06 1.542-1.248.418-.112.848-.168 1.273-.24.345-.058.59-.182.696-.54.033-.112.046-.227.048-.343l.002-5.86a.577.577 0 00-.007-.1c-.032-.173-.128-.27-.3-.248-.1.012-.197.038-.293.065l-5.835 1.54a.63.63 0 00-.163.065c-.12.078-.163.2-.17.34-.003.04 0 .078 0 .118l-.002 9.672c0 .248-.018.497-.063.742-.133.73-.492 1.304-1.15 1.673-.383.216-.8.325-1.234.377-.355.043-.71.063-1.064-.013-.813-.172-1.387-.7-1.585-1.504-.1-.406-.093-.81.043-1.207.268-.784.894-1.198 1.63-1.408.385-.108.78-.17 1.175-.236.387-.063.58-.213.67-.592.016-.064.023-.13.023-.197l.003-11.882c0-.164.014-.328.05-.488.063-.295.208-.478.498-.556.217-.058.438-.093.66-.135l5.623-1.47c.39-.1.78-.197 1.172-.29.193-.047.39-.077.586-.05.252.032.408.19.454.442.018.098.024.198.024.298l-.003 7.665z"/></svg>
+                <div><span class="link-label">apple music</span><span class="link-sub">streaming</span></div>
+            </a>
+            <a href="https://taxez.bandcamp.com/music/"" class="link-item" target="_blank" rel="noopener">
+                <svg class="link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>
+                <div><span class="link-label">bandcamp</span><span class="link-sub">wydawnictwa</span></div>
+            </a>
+            <a href="https://www.instagram.com/taxez.zzz/" class="link-item" target="_blank" rel="noopener">
+                <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+                <div><span class="link-label">instagram</span><span class="link-sub">@taxez.zzz</span></div>
+            </a>
+            <a href="https://www.facebook.com/taxez.zzz/" class="link-item" target="_blank" rel="noopener">
+                <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                <div><span class="link-label">facebook</span><span class="link-sub">taxez.zzz</span></div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════════ CONTACT ════════ -->
+<section id="contact">
+    <div class="reveal">
+        <p class="section-num">005</p>
+        <h2 class="section-title">współpraca & prasa</h2>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <h4>email</h4>
+                <a href="mailto:taxez.pl@gmail.com">taxez.pl@gmail.com</a>
+                <p>materiały, wywiady, recenzje, współpraca</p>
+            </div>
+            <div class="contact-card">
+                <h4>telefon</h4>
+                <a href="tel:+48798898217">+48 798 898 217</a>
+                <p>kontakt bezpośredni</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p class="footer-logo">taxez</p>
+    <p class="footer-copy">© 2026 taxez · kraków</p>
+</footer>
+
+<script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
